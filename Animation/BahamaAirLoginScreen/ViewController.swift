@@ -86,19 +86,21 @@ class ViewController: UIViewController {
         self.heading.center.x += self.view.bounds.width
     }
     
-    UIView.animate(withDuration: 0.5, delay: 0.3, options: [.curveEaseInOut], animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
         self.username.center.x += self.view.bounds.width
     }, completion: nil)
     
-    UIView.animate(withDuration: 0.5, delay: 0.4, options: [], animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
         self.password.center.x += self.view.bounds.width
     }, completion: nil)
-    
     
     cloud1.alpha = 0
     cloud2.alpha = 0
     cloud3.alpha = 0
     cloud4.alpha = 0
+    
+    loginButton.center.y += 30.0
+    loginButton.alpha = 0.0
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -119,12 +121,27 @@ class ViewController: UIViewController {
     UIView.animate(withDuration: 0.5, delay: 1.1, options: [], animations: {
         self.cloud4.alpha = 1.0
     }, completion: nil)
+    
+    UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options:[], animations: {
+        self.loginButton.center.y -= 30
+        self.loginButton.alpha = 1.0
+    }, completion: nil)
   }
   
   // MARK: further methods
   
   @IBAction func login() {
     view.endEditing(true)
+    UIView.animate(withDuration: 1.5, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: [], animations: {
+        self.loginButton.bounds.size.width += 80
+    }, completion: nil)
+    
+    UIView.animate(withDuration: 0.33, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: {
+        self.loginButton.center.y += 60.0
+        self.loginButton.backgroundColor = UIColor(red: 0.85, green: 0.83, blue: 0.45, alpha: 1.0)
+        self.spinner.center = CGPoint(x: 40.0, y: self.loginButton.bounds.height / 2)
+        self.spinner.alpha = 1.0
+    }, completion: nil)
   }
   
   // MARK: UITextFieldDelegate
